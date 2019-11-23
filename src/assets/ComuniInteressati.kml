@@ -2,6 +2,14 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>Comuni Interessati</name>
+    <Style id="style-Restaurant">
+          <IconStyle>
+            <scale>0.7</scale>
+            <Icon>
+              <href>https://maps.google.com/mapfiles/kml/pal2/icon40.png</href>
+            </Icon>
+          </IconStyle>
+        </Style>
     <Style id="icon-1590-BDBDBD-normal">
       <IconStyle>
         <color>ffbdbdbd</color>
@@ -27,14 +35,9 @@
       </LabelStyle>
     </Style>
     <StyleMap id="icon-1590-BDBDBD">
-      <Pair>
-        <key>normal</key>
+    
         <styleUrl>#icon-1590-BDBDBD-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-1590-BDBDBD-highlight</styleUrl>
-      </Pair>
+    
     </StyleMap>
     <Style id="icon-1594-0288D1-normal">
       <IconStyle>
@@ -61,14 +64,7 @@
       </LabelStyle>
     </Style>
     <StyleMap id="icon-1594-0288D1">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-1594-0288D1-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
         <styleUrl>#icon-1594-0288D1-highlight</styleUrl>
-      </Pair>
     </StyleMap>
     <Style id="icon-1899-DB4436-normal">
       <IconStyle>
@@ -97,14 +93,7 @@
       </LabelStyle>
     </Style>
     <StyleMap id="icon-1899-DB4436">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-1899-DB4436-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-1899-DB4436-highlight</styleUrl>
-      </Pair>
+      <styleUrl>#icon-1899-DB4436-normal</styleUrl>
     </StyleMap>
     <Placemark>
       <name>Casalpusterlengo</name>

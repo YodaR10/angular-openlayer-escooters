@@ -67,7 +67,16 @@ function getDonutStyles(
 })
 export class AppComponent {
   map: Map;
-  vectorSource: VectorSource = new VectorSource();
+  
+  VectorSource: VectorSource = new VectorSource({
+    url: "../assets/ComuniInteressati.kml", 
+    format: new KML(),
+    style: new Style()
+  });
+
+  VectorLayer: VectorLayer = new VectorLayer({
+          source: this.VectorSource
+        }); 
 
   ngOnInit() {
     this.map = new Map({
@@ -94,14 +103,7 @@ export class AppComponent {
               "?apikey=e40eafce191d45d9996738a6926e8e16"
           })
         }),
-        new VectorLayer({
-          source: new VectorSource({
-            url: "../assets/ComuniInteressati.kml",
-            format: new KML(
-              
-            )
-          })
-        })
+        this.VectorLayer
       ],
       view: new View({
         center: [1388626, 5145039],
@@ -109,7 +111,7 @@ export class AppComponent {
       })
     });
 
-/*
+    /*
     const geojson = {
       type: "FeatureCollection",
       features: [
