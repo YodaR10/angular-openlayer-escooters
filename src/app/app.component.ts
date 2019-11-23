@@ -84,7 +84,23 @@ export class AppComponent {
     }),
     style: function(feature) {
         var size = feature.get("features").length;
-        console.log(size);
+        if(size == 1) return new Style({
+            image: new CircleStyle({
+              radius: 10+size,
+              stroke: new Stroke({
+                color: "#fff"
+              }),
+              fill: new Fill({
+                color: "#3399CC"
+              })
+            }),
+            text: new Text({
+              text: size.toString(),
+              fill: new Fill({
+                color: "#fff"
+              })
+            })
+          });
         var style; // = this.styleCache;
         if (!style) {
           style = new Style({
