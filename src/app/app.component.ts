@@ -96,11 +96,8 @@ export class AppComponent {
         }),
         new VectorLayer({
           source: new VectorSource({
-            url: "./kml/ComuniInteressati.kml",
-            format: new KML({
-                    extractStyles: true,
-                    extractAttributes: true
-                }),
+            url: "../assets/ComuniInteressati.kml",
+            format: new KML()
           })
         })
       ],
@@ -118,7 +115,7 @@ export class AppComponent {
           properties: {},
           geometry: {
             type: "Point",
-            coordinates: [3.115096092224121, 45.78757682111226]
+            coordinates: [0.115096092224121, 45.78757682111226]
           }
         }
       ]
