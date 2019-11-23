@@ -97,16 +97,19 @@ export class AppComponent {
         new VectorLayer({
           source: new VectorSource({
             url: "../assets/ComuniInteressati.kml",
-            format: new KML()
+            format: new KML(
+              
+            )
           })
         })
       ],
       view: new View({
-        center: [288626, 5885039],
-        zoom: 5
+        center: [1388626, 5145039],
+        zoom: 6
       })
     });
 
+/*
     const geojson = {
       type: "FeatureCollection",
       features: [
@@ -127,5 +130,6 @@ export class AppComponent {
         featureProjection: "EPSG:3857"
       })
     );
+    */
   }
 }
