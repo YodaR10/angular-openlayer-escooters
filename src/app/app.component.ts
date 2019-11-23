@@ -10,6 +10,7 @@ import { click, singleClick } from "ol/events/condition";
 import Select from "ol/interaction/Select";
 import OSM, { ATTRIBUTION } from "ol/source/OSM";
 import KML from "ol/format/KML";
+import Stamen from "ol/source/Stamen";
 
 // rayon 2*PI*r
 const radius = 50;
@@ -67,21 +68,26 @@ function getDonutStyles(
 })
 export class AppComponent {
   map: Map;
-  
+
   VectorSource: VectorSource = new VectorSource({
-    url: "../assets/ComuniInteressati.kml", 
+    url: "../assets/ComuniInteressati.kml",
     format: new KML(),
     style: new Style()
   });
 
   VectorLayer: VectorLayer = new VectorLayer({
-          source: this.VectorSource
-        }); 
+    source: this.VectorSource
+  });
 
   ngOnInit() {
     this.map = new Map({
       target: "map",
       layers: [
+        new TileLayer({
+          source: new Stamen({
+            layer: "watercolor"
+          })
+        }),
         /*new TileLayer({
           source: new XYZ({ url: 'https://{a-c}.tile.osm.org/{z}/{x}/{y}.png' })
         }),
@@ -93,6 +99,11 @@ export class AppComponent {
           ]
         }),*/
         new TileLayer({
+          source: new Stamen({
+            layer: "terrain-labels"
+          })
+
+          /*
           source: new OSM({
             attributions: [
               'All maps © <a href="https://www.opencyclemap.org/">OpenCycleMap</a>',
@@ -102,7 +113,9 @@ export class AppComponent {
               "https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png" +
               "?apikey=e40eafce191d45d9996738a6926e8e16"
           })
+          */
         }),
+
         this.VectorLayer
       ],
       view: new View({
