@@ -11,6 +11,8 @@ import Select from "ol/interaction/Select";
 import OSM, { ATTRIBUTION } from "ol/source/OSM";
 import KML from "ol/format/KML";
 import Stamen from "ol/source/Stamen";
+import Cluster from "ol/source/Cluster";
+import { Circle as CircleStyle, RegularShape, Text } from "ol/style";
 
 // rayon 2*PI*r
 const radius = 50;
@@ -76,7 +78,36 @@ export class AppComponent {
   });
 
   VectorLayer: VectorLayer = new VectorLayer({
-    source: this.VectorSource
+    source: new Cluster({
+      distance: 40,
+      source: this.VectorSource, 
+    }),
+    style: function(feature) {
+        var size = feature.get("features").length;
+        console.log(size);
+        var style; // = this.styleCache;
+        if (!style) {
+          style = new Style({
+            image: new CircleStyle({
+              radius: 10+size,
+              stroke: new Stroke({
+                color: "#fff"
+              }),
+              fill: new Fill({
+                color: "#3399CC"
+              })
+            }),
+            text: new Text({
+              text: size.toString(),
+              fill: new Fill({
+                color: "#fff"
+              })
+            })
+          });
+          //this.styleCache[size] = style;
+        }
+        return style;
+      }
   });
 
   ngOnInit() {
