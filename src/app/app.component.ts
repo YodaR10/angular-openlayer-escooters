@@ -80,51 +80,71 @@ export class AppComponent {
   VectorLayer: VectorLayer = new VectorLayer({
     source: new Cluster({
       distance: 40,
-      source: this.VectorSource, 
+      source: this.VectorSource
     }),
     style: function(feature) {
-        var size = feature.get("features").length;
-        if(size == 1) return new Style({
-            image: new CircleStyle({
-              radius: 10+size,
-              stroke: new Stroke({
-                color: "#fff"
-              }),
-              fill: new Fill({
-                color: "#3399CC"
-              })
-            }),
-            text: new Text({
-              text: size.toString(),
-              fill: new Fill({
-                color: "#fff"
-              })
-            })
-          });
-        var style; // = this.styleCache;
-        if (!style) {
-          style = new Style({
-            image: new CircleStyle({
-              radius: 10+size,
-              stroke: new Stroke({
-                color: "#fff"
-              }),
-              fill: new Fill({
-                color: "#3399CC"
-              })
-            }),
-            text: new Text({
-              text: size.toString(),
-              fill: new Fill({
-                color: "#fff"
-              })
-            })
-          });
-          //this.styleCache[size] = style;
+      var size = feature.get("features").length;
+      if (size == 1)
+      {
+        //console.log('',feature.get('features')[0].values_.Stato);
+        var nomeComune = feature.get('features')[0].values_.name;
+        var stato = feature.get('features')[0].values_.Stato;
+        var colore;
+        switch(stato){
+          case 'Interessati, probabile avvio sperimentazione': colore='#f59342'; break;
+          case 'Avviata (segnaletica da installare)': colore='#f5f242'; break;
+          case 'Avviata': colore = "#81f542"; break;
+          default: colore = "#3399CC"; break;
         }
-        return style;
+        return new Style({
+          image: new CircleStyle({
+            radius: 10 + size,
+            stroke: new Stroke({
+              color: "#000"
+            }),
+            fill: new Fill({
+              color: colore
+            })
+          }),
+          text: new Text({
+            text: nomeComune, 
+            textAlign: 'left',
+            font: 'bold 12px sans-serif',
+            fill: new Fill({
+              color: "#000"
+            }),
+            stroke: new Stroke({
+              color: "#fff"
+            }),
+          })
+        });
       }
+      var style; // = this.styleCache;
+      if (!style) {
+        style = new Style({
+          image: new CircleStyle({
+            radius: 10 + size,
+            stroke: new Stroke({
+              color: "#fff"
+            }),
+            fill: new Fill({
+              color: "#3399CC"
+            })
+          }),
+          text: new Text({
+            text: ' '+size.toString()+' ',
+            fill: new Fill({
+              color: "#fff"
+            })
+          })
+        });
+        //this.styleCache[size] = style;
+      }
+      return style;
+    }
   });
+
+  
 
   ngOnInit() {
     this.map = new Map({
