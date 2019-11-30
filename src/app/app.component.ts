@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { map } from "rxjs/operators";
 
-import { Map, View } from "ol";
+import { Map, View, Overlay } from "ol";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { XYZ, Vector as VectorSource } from "ol/source";
 import { Style, Fill, Stroke, Circle } from "ol/style";
@@ -153,6 +153,15 @@ export class AppComponent {
   });
 
   ngOnInit() {
+    var popup = document.getElementById("popup");
+    console.log("popup", popup);
+    const overlay = new Overlay({
+      element: document.getElementById("popup"),
+      autoPan: true,
+      autoPanAnimation: {
+        duration: 250
+      }
+    });
     this.map = new Map({
       target: "map",
       layers: [
@@ -191,6 +200,7 @@ export class AppComponent {
 
         this.VectorLayer
       ],
+      overlays: [overlay],
       view: new View({
         center: [1388626, 5145039],
         zoom: 6
@@ -201,6 +211,56 @@ export class AppComponent {
       var pixel = this.map.getEventPixel(evt.originalEvent);
       var hit = this.map.hasFeatureAtPixel(pixel);
       this.map.getViewport().style.cursor = hit ? "pointer" : "";
+    });
+
+    this.map.on("click", evt => {
+      var pixel = this.map.getEventPixel(evt.originalEvent);
+      var feature = this.map.forEachFeatureAtPixel(pixel, function(feature) {
+        return feature;
+      });
+      if (feature) {
+        var ncomuni = feature.get("features").length;
+        console.log(ncomuni);
+        var innerhtmlPopup;
+        if (ncomuni == 1) {
+          var nomeComune = feature.get("features")[0].values_.name;
+          var stato = feature.get("features")[0].values_.Stato;
+          var link = feature.get("features")[0].values_["Link fonte"];
+          var msg;
+          switch (stato) {
+            case "Interessati, probabile avvio sperimentazione":
+              msg =
+                "Stato: segnali di interesse da parte del comune, ordinanza e segnaletica assenti.";
+              break;
+            case "Avviata (segnaletica da installare)":
+              msg =
+                "Stato: sperimentazione avviata, segnaletica non ancora installata.";
+              break;
+            case "Avviata":
+              msg =
+                "Stato: sperimentazione avviata, segnaletica stradale presente.";
+              break;
+          }
+          console.log(ncomuni + " comune/i " + nomeComune + " stato " + stato);
+          innerhtmlPopup =
+            "<h3>" +
+            nomeComune +
+            "</h3><p>" +
+            msg +
+            "</p><p><a href='" +
+            link +
+            "' target='_blank'>Link alla fonte</a></p>";
+        } else {
+          innerhtmlPopup = "<h3>Segnalati " + ncomuni + " comuni:</h3><p><ul>";
+          feature.get("features").forEach(function(feature) {
+            innerhtmlPopup += "<li>" +feature.values_.name+ "</li>";
+          });
+          innerhtmlPopup += "</ul>aumentare lo zoom per maggiori dettagli</p>";
+        }
+        var coordinate = evt.coordinate;
+        popup.innerHTML = innerhtmlPopup;
+        overlay.setPosition(coordinate);
+      }
     });
 
     /*
