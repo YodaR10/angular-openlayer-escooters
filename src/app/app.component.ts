@@ -221,7 +221,7 @@ export class AppComponent {
       if (feature) {
         var ncomuni = feature.get("features").length;
         console.log(ncomuni);
-        var innerhtmlPopup;
+        var innerhtmlPopup = "<a href='#' id='popup-closer' class='ol-popup-closer'></a>";
         if (ncomuni == 1) {
           var nomeComune = feature.get("features")[0].values_.name;
           var stato = feature.get("features")[0].values_.Stato;
@@ -237,12 +237,11 @@ export class AppComponent {
                 "Stato: sperimentazione avviata, segnaletica non ancora installata.";
               break;
             case "Avviata":
-              msg =
-                "Stato: sperimentazione avviata, segnaletica stradale presente.";
+              msg = "Stato: sperimentazione avviata, segnaletica stradale presente.";
               break;
           }
           console.log(ncomuni + " comune/i " + nomeComune + " stato " + stato);
-          innerhtmlPopup =
+          innerhtmlPopup +=
             "<h3>" +
             nomeComune +
             "</h3><p>" +
@@ -251,7 +250,7 @@ export class AppComponent {
             link +
             "' target='_blank'>Link alla fonte</a></p>";
         } else {
-          innerhtmlPopup = "<h3>Segnalati " + ncomuni + " comuni:</h3><p><ul>";
+          innerhtmlPopup += "<h3>Segnalati " + ncomuni + " comuni:</h3><p><ul>";
           feature.get("features").forEach(function(feature) {
             innerhtmlPopup += "<li>" +feature.values_.name+ "</li>";
           });
@@ -260,6 +259,8 @@ export class AppComponent {
         var coordinate = evt.coordinate;
         popup.innerHTML = innerhtmlPopup;
         overlay.setPosition(coordinate);
+      } else {
+        overlay.setPosition(undefined);
       }
     });
 

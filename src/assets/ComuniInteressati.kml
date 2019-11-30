@@ -642,27 +642,6 @@
       </Point>
     </Placemark>
     <Placemark>
-      <name>Novara</name>
-      <description><![CDATA[descrizione: <br>Stato: Interessati, probabile avvio sperimentazione<br>Link fonte: https://www.lastampa.it/novara/2019/09/17/news/novara-i-progetti-dell-assessore-alla-mobilita-bike-sharing-piste-ciclabili-e-ztl-ampliata-1.37476919]]></description>
-      <styleUrl>#icon-1594-0288D1</styleUrl>
-      <ExtendedData>
-        <Data name="descrizione">
-          <value/>
-        </Data>
-        <Data name="Stato">
-          <value>Interessati, probabile avvio sperimentazione</value>
-        </Data>
-        <Data name="Link fonte">
-          <value>https://www.lastampa.it/novara/2019/09/17/news/novara-i-progetti-dell-assessore-alla-mobilita-bike-sharing-piste-ciclabili-e-ztl-ampliata-1.37476919</value>
-        </Data>
-      </ExtendedData>
-      <Point>
-        <coordinates>
-          8.6221612,45.44693,0
-        </coordinates>
-      </Point>
-    </Placemark>
-    <Placemark>
       <name>Vicenza</name>
       <description><![CDATA[descrizione: <br>Stato: Interessati, probabile avvio sperimentazione<br>Link fonte: https://www.eventbrite.it/e/biglietti-citemos-2019-la-citta-a-due-ruote-la-micromobilita-elettrica-nelle-citta-italiane-68131688715]]></description>
       <styleUrl>#icon-1594-0288D1</styleUrl>
