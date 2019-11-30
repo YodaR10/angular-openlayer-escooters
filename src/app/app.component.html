@@ -1,4 +1,4 @@
-<div style="height: 100vh;">
+<div style="height: 100vh;" fxLayout="column">
 	<mat-toolbar color="primary">
 		<mat-toolbar-row>
 			<button mat-icon-button (click)="sidenav.toggle()" fxShow="true">
@@ -13,7 +13,7 @@
 		</mat-toolbar-row>
 	</mat-toolbar>
 
-	<mat-sidenav-container fxFlexFill>
+	<mat-sidenav-container fxFlex fxLayout="row">
 		<mat-sidenav #sidenav>
       <!-- Per schermi piccoli -->
 			<mat-nav-list>
@@ -25,7 +25,7 @@
 				<a href="#" mat-list-item>Discalmer</a>
 			</mat-nav-list>
 		</mat-sidenav>
-		<mat-sidenav-content fxFlexFill>
+		<mat-sidenav-content fxFlex>
 			<div id="map"></div>
 			<div #overlayElement id="popup" class="ol-popup">
 				<div id="popup-content">Test</div>
