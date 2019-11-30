@@ -1,4 +1,35 @@
-<div id="map"></div>
-<div #overlayElement id="popup" class="ol-popup">
-  <div id="popup-content">Test</div>
+<div style="height: 100vh;">
+	<mat-toolbar color="primary">
+		<mat-toolbar-row>
+			<button mat-icon-button (click)="sidenav.toggle()" fxShow="true">
+          <mat-icon>menu</mat-icon>
+        </button>
+			<span>Micromobilità in Italia</span>
+			<span class="menu-spacer"></span>
+			<div fxShow="true" fxHide.lt-md>
+				<!-- Per Schermi grandi -->
+				<a href="https://www.facebook.com/groups/286938265272169" target="_blank" mat-button>by Club Italiano del Monopattino Elettrico</a>
+			</div>
+		</mat-toolbar-row>
+	</mat-toolbar>
+
+	<mat-sidenav-container fxFlexFill>
+		<mat-sidenav #sidenav>
+      <!-- Per schermi piccoli -->
+			<mat-nav-list>
+				<a (click)="sidenav.toggle()" mat-list-item><mat-icon>keyboard_backspace</mat-icon></a>
+        
+				<a href="https://www.facebook.com/groups/286938265272169" mat-list-item>Club Italiano del Monopattino Elettrico</a>
+        <a href="#" mat-list-item>Radio CIME</a>
+				<a href="#" mat-list-item>Crediti</a>
+				<a href="#" mat-list-item>Discalmer</a>
+			</mat-nav-list>
+		</mat-sidenav>
+		<mat-sidenav-content fxFlexFill>
+			<div id="map"></div>
+			<div #overlayElement id="popup" class="ol-popup">
+				<div id="popup-content">Test</div>
+			</div>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
 </div>
