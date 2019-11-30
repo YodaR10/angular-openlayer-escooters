@@ -84,19 +84,26 @@ export class AppComponent {
     }),
     style: function(feature) {
       var size = feature.get("features").length;
-      if (size == 1)
-      {
+      if (size == 1) {
         //console.log('',feature.get('features')[0].values_.Stato);
-        var nomeComune = feature.get('features')[0].values_.name;
-        var stato = feature.get('features')[0].values_.Stato;
+        var nomeComune = feature.get("features")[0].values_.name;
+        var stato = feature.get("features")[0].values_.Stato;
         var colore;
-        switch(stato){
-          case 'Interessati, probabile avvio sperimentazione': colore='#f59342'; break;
-          case 'Avviata (segnaletica da installare)': colore='#f5f242'; break;
-          case 'Avviata': colore = "#81f542"; break;
-          default: colore = "#3399CC"; break;
+        switch (stato) {
+          case "Interessati, probabile avvio sperimentazione":
+            colore = "#f59342";
+            break;
+          case "Avviata (segnaletica da installare)":
+            colore = "#f5f242";
+            break;
+          case "Avviata":
+            colore = "#81f542";
+            break;
+          default:
+            colore = "#3399CC";
+            break;
         }
-        return new Style({
+        var style = new Style({
           image: new CircleStyle({
             radius: 10 + size,
             stroke: new Stroke({
@@ -107,17 +114,18 @@ export class AppComponent {
             })
           }),
           text: new Text({
-            text: nomeComune, 
-            textAlign: 'left',
-            font: 'bold 12px sans-serif',
+            text: nomeComune,
+            textAlign: "left",
+            font: "bold 12px sans-serif",
             fill: new Fill({
               color: "#000"
             }),
             stroke: new Stroke({
               color: "#fff"
-            }),
+            })
           })
         });
+        return style;
       }
       var style; // = this.styleCache;
       if (!style) {
@@ -132,7 +140,7 @@ export class AppComponent {
             })
           }),
           text: new Text({
-            text: ' '+size.toString()+' ',
+            text: " " + size.toString() + " ",
             fill: new Fill({
               color: "#fff"
             })
@@ -143,8 +151,6 @@ export class AppComponent {
       return style;
     }
   });
-
-  
 
   ngOnInit() {
     this.map = new Map({
@@ -189,6 +195,12 @@ export class AppComponent {
         center: [1388626, 5145039],
         zoom: 6
       })
+    });
+
+    this.map.on("pointermove", evt => {
+      var pixel = this.map.getEventPixel(evt.originalEvent);
+      var hit = this.map.hasFeatureAtPixel(pixel);
+      this.map.getViewport().style.cursor = hit ? "pointer" : "";
     });
 
     /*
