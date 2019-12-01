@@ -18,15 +18,20 @@
 		<mat-sidenav #sidenav>
 			<!-- Per schermi piccoli -->
 			<mat-nav-list>
+				<mat-list-item>
+					<img matListAvatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Logo CIME">
+					<h3 matLine>Club Italiano</h3>
+					<p matLine>
+						<span> del Monopattino Elettrico </span>
+					</p>
+				</mat-list-item>
+				<a href="#" mat-list-item>Radio CIME</a>
+				<mat-list-item>Legenda</mat-list-item>
+				<a href="#" mat-list-item>Crediti</a>
+				<a href="#" mat-list-item>Discalmer</a>
 				<a (click)="sidenav.toggle()" mat-list-item>
 					<mat-icon>keyboard_backspace</mat-icon>
 				</a>
-
-				<a href="https://www.facebook.com/groups/286938265272169" mat-list-item>Club Italiano del Monopattino
-					Elettrico</a>
-				<a href="#" mat-list-item>Radio CIME</a>
-				<a href="#" mat-list-item>Crediti</a>
-				<a href="#" mat-list-item>Discalmer</a>
 			</mat-nav-list>
 		</mat-sidenav>
 		<mat-sidenav-content fxFlex>
