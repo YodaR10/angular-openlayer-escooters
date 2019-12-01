@@ -152,9 +152,16 @@ export class AppComponent {
     }
   });
 
+  titoloPopup: string;
+  sottotitoloPopup: string;
+  testoPopup: string;
+  linkPopup: string;
+  comuni: string[];
+  viewLista: boolean;
+
   ngOnInit() {
     var popup = document.getElementById("popup");
-    console.log("popup", popup);
+    //console.log("popup", popup);
     const overlay = new Overlay({
       element: document.getElementById("popup"),
       autoPan: true,
@@ -220,10 +227,12 @@ export class AppComponent {
       });
       if (feature) {
         var ncomuni = feature.get("features").length;
-        console.log(ncomuni);
+        //console.log(ncomuni);
         var innerhtmlPopup = "<a href='#' id='popup-closer' class='ol-popup-closer'></a>";
         if (ncomuni == 1) {
+          this.viewLista = false;
           var nomeComune = feature.get("features")[0].values_.name;
+          this.titoloPopup = nomeComune;
           var stato = feature.get("features")[0].values_.Stato;
           var link = feature.get("features")[0].values_["Link fonte"];
           var msg;
@@ -240,6 +249,7 @@ export class AppComponent {
               msg = "Stato: sperimentazione avviata, segnaletica stradale presente.";
               break;
           }
+          this.testoPopup = msg;
           console.log(ncomuni + " comune/i " + nomeComune + " stato " + stato);
           innerhtmlPopup +=
             "<h3>" +
@@ -249,15 +259,20 @@ export class AppComponent {
             "</p><p><a href='" +
             link +
             "' target='_blank'>Link alla fonte</a></p>";
-        } else {
-          innerhtmlPopup += "<h3>Segnalati " + ncomuni + " comuni:</h3><p><ul>";
+        } else {   
+          this.viewLista = true;
+          this.titoloPopup = "Segnalati " + ncomuni + " comuni";
+          var lista = [];
           feature.get("features").forEach(function(feature) {
-            innerhtmlPopup += "<li>" +feature.values_.name+ "</li>";
+            lista.push(feature.values_.name);
           });
-          innerhtmlPopup += "</ul>aumentare lo zoom per maggiori dettagli</p>";
+          this.comuni = lista;
+          console.log(this.comuni);
+          innerhtmlPopup = "aumentare lo zoom per maggiori dettagli";
+          this.testoPopup = innerhtmlPopup;
         }
         var coordinate = evt.coordinate;
-        popup.innerHTML = innerhtmlPopup;
+        //popup.innerHTML = innerhtmlPopup;
         overlay.setPosition(coordinate);
       } else {
         overlay.setPosition(undefined);

@@ -8,27 +8,50 @@
 			<span class="menu-spacer"></span>
 			<div fxShow="true" fxHide.lt-md>
 				<!-- Per Schermi grandi -->
-				<a href="https://www.facebook.com/groups/286938265272169" target="_blank" mat-button>by Club Italiano del Monopattino Elettrico</a>
+				<a href="https://www.facebook.com/groups/286938265272169" target="_blank" mat-button>by Club Italiano
+					del Monopattino Elettrico</a>
 			</div>
 		</mat-toolbar-row>
 	</mat-toolbar>
 
 	<mat-sidenav-container fxFlex fxLayout="row">
 		<mat-sidenav #sidenav>
-      <!-- Per schermi piccoli -->
+			<!-- Per schermi piccoli -->
 			<mat-nav-list>
-				<a (click)="sidenav.toggle()" mat-list-item><mat-icon>keyboard_backspace</mat-icon></a>
-        
-				<a href="https://www.facebook.com/groups/286938265272169" mat-list-item>Club Italiano del Monopattino Elettrico</a>
-        <a href="#" mat-list-item>Radio CIME</a>
+				<a (click)="sidenav.toggle()" mat-list-item>
+					<mat-icon>keyboard_backspace</mat-icon>
+				</a>
+
+				<a href="https://www.facebook.com/groups/286938265272169" mat-list-item>Club Italiano del Monopattino
+					Elettrico</a>
+				<a href="#" mat-list-item>Radio CIME</a>
 				<a href="#" mat-list-item>Crediti</a>
 				<a href="#" mat-list-item>Discalmer</a>
 			</mat-nav-list>
 		</mat-sidenav>
 		<mat-sidenav-content fxFlex>
 			<div id="map"></div>
-			<div #overlayElement id="popup" class="ol-popup">
-				<div id="popup-content">Test</div>
+			<div mat-card #overlayElement id="popup" class="ol-popup">
+				<mat-card-header>
+					<div mat-card-avatar></div>
+					<mat-card-title>{{titoloPopup}}</mat-card-title>
+					<mat-card-subtitle>{{sottotitoloPopup}}</mat-card-subtitle>
+				</mat-card-header>
+				<!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+				<mat-card-content>
+					<mat-list *ngIf="viewLista">
+						<mat-list-item *ngFor="let comune of comuni">{{comune}}</mat-list-item>
+					</mat-list>
+					<p>
+						{{testoPopup}}
+					</p>
+				</mat-card-content>
+				<mat-card-actions>
+					<a mat-button *ngIf="!viewLista" href='{{linkPopup}}' target="_blank">
+						<mat-icon>launch</mat-icon> Fonte
+					</a>
+				</mat-card-actions>
+
 			</div>
 		</mat-sidenav-content>
 	</mat-sidenav-container>

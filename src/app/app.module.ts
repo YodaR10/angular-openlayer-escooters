@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule } from "@angular/material";
+import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, MatCardModule } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
@@ -18,7 +18,8 @@ import { AppComponent } from './app.component';
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    FlexLayoutModule ],
+    FlexLayoutModule,
+    MatCardModule ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ],
 })
